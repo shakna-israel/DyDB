@@ -29,3 +29,4 @@ class DyDB(object):
         """Fetch the database from a file-like object"""
 
 testDB = DyDB()
+print(dir(testDB))

@@ -22,7 +22,7 @@ class DyDB(object):
         data_temp = {"_id":str(uuid.uuid4())}
         self.DataFileObject.write(json.dumps(data_temp, ensure_ascii=False))
 
-    def set(self, key, value):
+    def set(self, key, value=False):
         """Set a Key, Value pair"""
         temp_dict = {key: value}
         existing_data = json.loads(self.DataFileObject.getvalue())
@@ -34,15 +34,26 @@ class DyDB(object):
 
     def value(self, key):
         """Get a Value from a Key"""
+        existing_data = json.loads(self.DataFileObject.getvalue())
+        return existing_data[key]
 
     def key(self, value):
         """Get a List of Keys from a Value"""
+        existing_data = json.loads(self.DataFileObject.getvalue())
+        ret_list = []
+        for key, val in existing_data.items():
+            if val == value:
+                ret_list.append(key)
+        return ret_list
 
-    def store(self, data):
+    def store(self, dataFile=False):
         """Store the database to disk"""
 
-    def fetch(self):
+    def fetch(self, dataFile=False):
         """Fetch the database from disk"""
 
 testDB = DyDB()
 [print(x) for x in dir(testDB)]
+print(testDB.value("_id"))
+testDB.set("randomkey")
+print(testDB.key(False))

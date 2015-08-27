@@ -32,6 +32,7 @@ class DyDB(object):
         self.DataFileObject.truncate(0)
         self.DataFileObject.seek(0)
         self.DataFileObject.write(json.dumps(new_data, ensure_ascii=False))
+        return True
 
     def value(self, key):
         """Get a Value from a Key"""
@@ -63,10 +64,13 @@ class DyDB(object):
 
     def fetch(self, dataFile=False):
         """Fetch the database from disk"""
-
-testDB = DyDB()
-[print(x) for x in dir(testDB)]
-print(testDB.value("_id"))
-testDB.set("randomkey")
-print(testDB.key(False))
-testDB.store()
+        self.DataFileObject.truncate(0)
+        self.DataFileObject.seek(0)
+        if dataFile:
+            with open(dataFile, 'r') as openFile:
+                json_data = json.load(openFile)
+        else:
+            with open(os.path.expanduser("~/.DyDB/temp.dydb"), "r") as openFile:
+                json_data = json.load(openFile)
+        self.DataFileObject.write(json.dumps(json_data, ensure_ascii=False))
+        return True

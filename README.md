@@ -59,3 +59,26 @@ someData.fetch("myfile.json")
 
 * There is only one temporary file. Its easy to overwrite.
 * The database is ***not*** performant.
+* The top-level key *_id* is reserved. You can overwrite it, but in future, this may cause unexpected behaviour.
+
+## Install
+
+Currently, there is no install process.
+
+DyDB.py is a standalone file that can be dropped into the folder of any project where you want to import it.
+
+This will change in the future - it will remain a standalone file you can drop-in, but will be released to PyPI, (making it pip installable), but is not yet ready.
+
+## Contributing
+
+Currently, the project is at a very early stage. (Less than an hour at time of writing).
+
+This means that there is not yet an apparent style guide for contributing new features, and bugs have not been identified.
+
+However, some plans that exist may be contributable:
+
+* Temporary file storage and recall based on *_id* key, and maybe process ID, to allow for multiple temporary files to coexist.
+* Automatic temporary file storage. (Depending on the above.)
+* Tests. Tests. More tests. Make coverage scream 100%. (I prefer *nose*).
+* Multiple database modifications at once. Probably allow *DyDB.set* to take: a single key value, a key-value pair, a dictionary of key-value pairs.
+* Multiple database key fetching. Probably allow *DyDB.value* to take: a single key value, a list of key values.

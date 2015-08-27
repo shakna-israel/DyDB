@@ -1,7 +1,16 @@
+# Force Python 2 to treat print as a proper function, not a statement
+from __future__ import print_function
+
+# Import Unicode for Python 2 to make it work... Nicely.
+from __future__ import unicode_literals
+
+# Grabbing the right library between Python 2 and 3
 try:
     import io as StringIO
 except ImportError:
     import StringIO
+
+import uuid
 import json
 
 class DyDB(object):
@@ -9,24 +18,31 @@ class DyDB(object):
 
     def __init__(self):
         """Init setup"""
-        self.data_file = StringIO.StringIO()
-        data_temp = unicode(dict())
-        self.data_file.write(json.dumps(data_temp, ensure_ascii=False))
+        self.DataFileObject = StringIO.StringIO()
+        data_temp = {"_id":str(uuid.uuid4())}
+        self.DataFileObject.write(json.dumps(data_temp, ensure_ascii=False))
 
     def set(self, key, value):
         """Set a Key, Value pair"""
+        temp_dict = {key: value}
+        existing_data = json.loads(self.DataFileObject.getvalue())
+        new_data = existing_data.copy()
+        new_data.update(temp_dict)
+        self.DataFileObject.truncate(0)
+        self.DataFileObject.seek(0)
+        self.DataFileObject.write(json.dumps(new_data, ensure_ascii=False))
 
-    def val(self, key):
+    def value(self, key):
         """Get a Value from a Key"""
 
     def key(self, value):
         """Get a List of Keys from a Value"""
 
     def store(self, data):
-        """Store the database to a file-like object"""
+        """Store the database to disk"""
 
     def fetch(self):
-        """Fetch the database from a file-like object"""
+        """Fetch the database from disk"""
 
 testDB = DyDB()
-print(dir(testDB))
+[print(x) for x in dir(testDB)]

@@ -11,6 +11,7 @@ except ImportError:
     import StringIO
 
 import uuid
+import os
 import json
 
 class DyDB(object):
@@ -48,6 +49,17 @@ class DyDB(object):
 
     def store(self, dataFile=False):
         """Store the database to disk"""
+        existing_data = json.loads(self.DataFileObject.getvalue())
+        if dataFile:
+            with open(dataFile, 'w+') as openFile:
+                openFile.write(json.dumps(existing_data, sort_keys=True, indent=4, separators=(',', ': ')))
+            return True
+        else:
+            if not os.path.isdir(os.path.expanduser("~/.DyDB")):
+                os.makedirs(os.path.expanduser("~/.DyDB"))
+            with open(os.path.expanduser("~/.DyDB/temp.dydb"), "w+") as openFile:
+                openFile.write(json.dumps(existing_data, sort_keys=True, indent=4, separators=(',', ': ')))
+            return True
 
     def fetch(self, dataFile=False):
         """Fetch the database from disk"""
@@ -57,3 +69,4 @@ testDB = DyDB()
 print(testDB.value("_id"))
 testDB.set("randomkey")
 print(testDB.key(False))
+testDB.store()

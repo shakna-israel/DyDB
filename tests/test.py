@@ -65,13 +65,39 @@ class TestDyDB(unittest.TestCase):
         else:
             assert False
 
-    def test_dydb_set_key_pair(self):
+    def test_dydb_set_key_pair_value(self):
         """Test that we can set a key value pair, and that its value is correct"""
         testObject = DyDB.DyDB()
         testObject.set("testKey", "testValue")
         testData = json.loads(testObject.DataFileObject.getvalue())
         if testData["testKey"] == "testValue":
             pass
+        else:
+            assert False
+    
+    def test_dydb_set_key_list(self):
+        """Test that we can set a list of keys"""
+        testObject = DyDB.DyDB()
+        testObject.set(["mykey","testkey"])
+        testData = json.loads(testObject.DataFileObject.getvalue())
+        if "myKey" in testData:
+            if "testKey" in testData:
+                pass
+            else:
+                assert False
+        else:
+            assert False
+
+    def test_dydb_set_key_list_value(self):
+        """Test that we can set a list of keys"""
+        testObject = DyDB.DyDB()
+        testObject.set(["myKey", "testKey"])
+        testData = json.loads(testObject.DataFileObject.getvalue())
+        if testData["myKey"] == False:
+            if testData["testKey"] == False:
+                pass
+            else:
+                assert False
         else:
             assert False
 

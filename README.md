@@ -59,6 +59,12 @@ someData.key("myValue")
 # Grab all available keys:
 someData.key()
 
+# Remove a particular key from the Database:
+someData.pop("someKey")
+
+# Remove a list of keys from the Database:
+someData.pop(["someKey","someOtherKey"])
+
 # Store the Database to a temporary file:
 someData.store()
 

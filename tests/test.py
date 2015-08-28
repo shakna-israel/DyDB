@@ -212,7 +212,8 @@ class TestDyDB(unittest.TestCase):
         testObject = DyDB.DyDB()
         testObject.set("testKey", "testValue")
         testObject.store()
-        with open(os.path.expanduser("~/.DyDB/temp.dydb"), "r") as openFile:
+        tempID = testObject.value("_id")
+        with open(os.path.expanduser("~/.DyDB/" + tempID + ".dydb"), "r") as openFile:
             json_data = json.load(openFile)
         if "testKey" in json_data:
             pass
@@ -246,7 +247,8 @@ class TestDyDB(unittest.TestCase):
         testDataDict = {"testKey":"testValue"}
         if not os.path.isdir(os.path.expanduser("~/.DyDB")):
             os.makedirs(os.path.expanduser("~/.DyDB"))
-        with open(os.path.expanduser("~/.DyDB/temp.dydb"), "w+") as openFile:
+        tempID = testObject.value("_id")
+        with open(os.path.expanduser("~/.DyDB/" + tempID + ".dydb"), "w+") as openFile:
             openFile.write(json.dumps(testDataDict, sort_keys=True, indent=4, separators=(',', ': ')))
         testObject.fetch()
         testData = json.loads(testObject.DataFileObject.getvalue())
@@ -261,7 +263,8 @@ class TestDyDB(unittest.TestCase):
         testDataDict = {"testKey":"testValue"}
         if not os.path.isdir(os.path.expanduser("~/.DyDB")):
             os.makedirs(os.path.expanduser("~/.DyDB"))
-        with open(os.path.expanduser("~/.DyDB/temp.dydb"), "w+") as openFile:
+        tempID = testObject.value("_id")
+        with open(os.path.expanduser("~/.DyDB/" + tempID + ".dydb"), "w+") as openFile:
             openFile.write(json.dumps(testDataDict, sort_keys=True, indent=4, separators=(',', ': ')))
         testObject.fetch()
         testData = json.loads(testObject.DataFileObject.getvalue())

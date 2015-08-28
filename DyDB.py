@@ -39,6 +39,7 @@ class DyDB(object):
         self.DataFileObject.truncate(0)
         self.DataFileObject.seek(0)
         self.DataFileObject.write(json.dumps(new_data, ensure_ascii=False))
+        self.store()
         return True
 
     def value(self, key):
@@ -77,11 +78,14 @@ class DyDB(object):
             self.DataFileObject.truncate(0)
             self.DataFileObject.seek(0)
             self.DataFileObject.write(json.dumps(existing_data, ensure_ascii=False))
+            self.store()
+            return True
         else:
             existing_data.pop(key, None)
             self.DataFileObject.truncate(0)
             self.DataFileObject.seek(0)
             self.DataFileObject.write(json.dumps(existing_data, ensure_ascii=False))
+            self.store()
             return True
 
     def store(self, dataFile=False):
@@ -94,19 +98,26 @@ class DyDB(object):
         else:
             if not os.path.isdir(os.path.expanduser("~/.DyDB")):
                 os.makedirs(os.path.expanduser("~/.DyDB"))
-            with open(os.path.expanduser("~/.DyDB/temp.dydb"), "w+") as openFile:
+            with open(os.path.expanduser("~/.DyDB/" + existing_data["_id"] + ".dydb"), "w+") as openFile:
                 openFile.write(json.dumps(existing_data, sort_keys=True, indent=4, separators=(',', ': ')))
             return True
 
     def fetch(self, dataFile=False):
         """Fetch the database from disk"""
+        existing_data = json.loads(self.DataFileObject.getvalue())
         self.DataFileObject.truncate(0)
         self.DataFileObject.seek(0)
         if dataFile:
-            with open(dataFile, 'r') as openFile:
-                json_data = json.load(openFile)
+            try:
+                with open(dataFile, 'r') as openFile:
+                    json_data = json.load(openFile)
+            except IOError:
+                return False
         else:
-            with open(os.path.expanduser("~/.DyDB/temp.dydb"), "r") as openFile:
-                json_data = json.load(openFile)
+            try:
+                with open(os.path.expanduser("~/.DyDB/" + existing_data["_id"] + ".dydb"), "r") as openFile:
+                    json_data = json.load(openFile)
+            except IOError:
+                return False
         self.DataFileObject.write(json.dumps(json_data, ensure_ascii=False))
         return True

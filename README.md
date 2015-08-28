@@ -38,8 +38,14 @@ someData = DyDB()
 # Set an empty Key:
 someData.set("myKey")
 
-# Set a Key with some Value:
+# Set several empty Keys:
+someData.set(["some key","testKey","SweetKey"])
+
+# Set a Key with Value:
 someData.set("otherKey", "myValue")
+
+# Set several Keys with Values:
+someData.set({"key":"value","somekey":"somevalue"})
 
 # Grab a key's value:
 someData.value("myKey")

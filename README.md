@@ -65,6 +65,7 @@ someData.fetch("myfile.json")
 * There is only one temporary file. Its easy to overwrite.
 * The database is ***not*** performant.
 * The top-level key *_id* is reserved. You can overwrite it, but in future, this may cause unexpected behaviour.
+* PyPy is not currently supported.
 
 ## Install
 

@@ -186,6 +186,18 @@ class TestDyDB(unittest.TestCase):
         else:
             assert False
 
+    def test_dydb_key_all(self):
+        """Test that we can grab a list of all keys"""
+        testObject = DyDB.DyDB()
+        testObject.set(["testKey","otherKey"])
+        if "testKey" in testObject.key():
+            if "otherKey" in testObject.key():
+                pass
+            else:
+                assert False
+        else:
+            assert False
+
     def test_store_temp_structure(self):
         """Test that when storing a temp file, it can generate the folder structure"""
         testObject = DyDB.DyDB()

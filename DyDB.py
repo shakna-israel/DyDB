@@ -54,14 +54,20 @@ class DyDB(object):
         else:
             return existing_data[key]
 
-    def key(self, value):
+    def key(self, value=False):
         """Get a List of Keys from a Value"""
         existing_data = json.loads(self.DataFileObject.getvalue())
-        ret_list = []
-        for key, val in existing_data.items():
-            if val == value:
+        if value != False:
+            ret_list = []
+            for key, val in existing_data.items():
+                if val == value:
+                    ret_list.append(key)
+            return ret_list
+        else:
+            ret_list = []
+            for key, val in existing_data.items():
                 ret_list.append(key)
-        return ret_list
+            return ret_list
 
     def store(self, dataFile=False):
         """Store the database to disk"""

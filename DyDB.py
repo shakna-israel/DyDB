@@ -44,7 +44,15 @@ class DyDB(object):
     def value(self, key):
         """Get a Value from a Key"""
         existing_data = json.loads(self.DataFileObject.getvalue())
-        return existing_data[key]
+        if type(key) == list:
+            ret_dict = {}
+            for item in existing_data:
+                for compare in key:
+                    if item == compare:
+                        ret_dict[item] = existing_data[item]
+            return ret_dict
+        else:
+            return existing_data[key]
 
     def key(self, value):
         """Get a List of Keys from a Value"""

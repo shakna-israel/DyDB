@@ -54,7 +54,10 @@ someData.value("myKey")
 someData.value(["myKey, "otherKey"])
 
 # Grab a list of keys that have a certain value:
-someData.key(False)
+someData.key("myValue")
+
+# Grab all available keys:
+someData.key()
 
 # Store the Database to a temporary file:
 someData.store()

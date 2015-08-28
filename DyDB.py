@@ -25,7 +25,14 @@ class DyDB(object):
 
     def set(self, key, value=False):
         """Set a Key, Value pair"""
-        temp_dict = {key: value}
+        if type(key) == list:
+            temp_dict = {}
+            for item in key:
+                temp_dict[item] = False
+        elif type(key) == dict:
+            temp_dict = key.copy()
+        else:
+            temp_dict = {key: value}
         existing_data = json.loads(self.DataFileObject.getvalue())
         new_data = existing_data.copy()
         new_data.update(temp_dict)

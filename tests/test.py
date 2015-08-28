@@ -269,3 +269,35 @@ class TestDyDB(unittest.TestCase):
             pass
         else:
             assert False
+
+    def test_dydb_pop(self):
+        """Test that we can remove data"""
+        testObject = DyDB.DyDB()
+        if testObject.pop("key"):
+            pass
+        else:
+            assert False
+
+    def test_dydb_pop_value(self):
+        """Test that we can remove data, and that it removes correctly"""
+        testObject = DyDB.DyDB()
+        testObject.set("testKey")
+        testObject.pop("testKey")
+        testData = json.loads(testObject.DataFileObject.getvalue())
+        if "testKey" in testData:
+            assert False
+        else:
+            pass
+
+    def test_dydb_pop_list(self):
+        testObject = DyDB.DyDB()
+        testObject.set(["testKey","otherKey"])
+        testObject.pop(["testKey","otherKey"])
+        testData = json.loads(testObject.DataFileObject.getvalue())
+        if "testKey" in testData:
+            assert False
+        else:
+            if "otherKey" in testData:
+                assert False
+            else:
+                pass

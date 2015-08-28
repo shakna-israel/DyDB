@@ -69,6 +69,21 @@ class DyDB(object):
                 ret_list.append(key)
             return ret_list
 
+    def pop(self, key):
+        """Remove a key from the database"""
+        existing_data = json.loads(self.DataFileObject.getvalue())
+        if type(key) == list:
+            [existing_data.pop(x, None) for x in key]
+            self.DataFileObject.truncate(0)
+            self.DataFileObject.seek(0)
+            self.DataFileObject.write(json.dumps(existing_data, ensure_ascii=False))
+        else:
+            existing_data.pop(key, None)
+            self.DataFileObject.truncate(0)
+            self.DataFileObject.seek(0)
+            self.DataFileObject.write(json.dumps(existing_data, ensure_ascii=False))
+            return True
+
     def store(self, dataFile=False):
         """Store the database to disk"""
         existing_data = json.loads(self.DataFileObject.getvalue())

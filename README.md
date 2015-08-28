@@ -78,11 +78,12 @@ someData.store("myfile.json")
 someData.fetch("myfile.json")
 ```
 
-**Note:**
+## Important Notes:
 
-* There is only one temporary file. Its easy to overwrite.
+* Though DyDB attempts to store a temporary file for each Database generated, there is an infintisimally small chance of collision, and one temporary file will overwrite another.
+    * TL;DR - Explicitly naming a file when storing is better.
 * The database is ***not*** performant.
-* The top-level key *_id* is reserved. You can overwrite it, but in future, this may cause unexpected behaviour.
+* The top-level key *_id* is reserved. Overwriting it may cause the automatic temporary file storage to... Fail.
 * PyPy is not currently supported.
 
 ## Install

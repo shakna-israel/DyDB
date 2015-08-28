@@ -1,5 +1,7 @@
 # DyDB - Dynamic DataBase
 
+[![Build Status](https://travis-ci.org/shakna-israel/DyDB.svg)](https://travis-ci.org/shakna-israel/DyDB)
+
 ## For the love of all that is holy, Why?
 
 ### TL;DR

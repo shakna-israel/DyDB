@@ -10,4 +10,7 @@ python:
  - "pypy3"
 install: "pip install nose"
 script: "nosetests"
-
+matrix:
+    allow_failures:
+        - pypy
+        - pypy3

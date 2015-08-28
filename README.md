@@ -87,10 +87,4 @@ Currently, the project is at a very early stage. (Less than an hour at time of w
 
 This means that there is not yet an apparent style guide for contributing new features, and bugs have not been identified.
 
-However, some plans that exist may be contributable:
-
-* Temporary file storage and recall based on *_id* key, and maybe process ID, to allow for multiple temporary files to coexist.
-* Automatic temporary file storage. (Depending on the above.)
-* Tests. Tests. More tests. Make coverage scream 100%. (I prefer *nose*).
-* Multiple database modifications at once. Probably allow *DyDB.set* to take: a single key value, a key-value pair, a dictionary of key-value pairs.
-* Multiple database key fetching. Probably allow *DyDB.value* to take: a single key value, a list of key values.
+However, some plans that exist may be contributable, they can be found [here](https://github.com/shakna-israel/DyDB/labels/enhancement).

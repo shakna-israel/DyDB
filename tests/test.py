@@ -101,6 +101,26 @@ class TestDyDB(unittest.TestCase):
         else:
             assert False
 
+    def test_dydb_set_key_dict(self):
+        """Test that we can set a dict of key values"""
+        testObject = DyDB.DyDB()
+        testObject.set({"testKey":"testValue"})
+        testData = json.loads(testObject.DataFileObject.getvalue())
+        if "testKey" in testData:
+            pass
+        else:
+            assert False
+
+    def test_dydb_set_key_dict_value(self):
+        """Test that we can set a dict of key values correctly"""
+        testObject = DyDB.DyDB()
+        testObject.set({"testKey":"testValue"})
+        testData = json.loads(testObject.DataFileObject.getvalue())
+        if testData["testKey"] == "testValue":
+            pass
+        else:
+            assert False
+
     def test_dydb_value(self):
         """Test that we can get a value from a key"""
         testObject = DyDB.DyDB()

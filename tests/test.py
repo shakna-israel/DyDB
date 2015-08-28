@@ -138,6 +138,27 @@ class TestDyDB(unittest.TestCase):
         else:
             assert False
 
+    def test_dydb_value_dict(self):
+        """Test that we can get a value from a list of keys"""
+        testObject = DyDB.DyDB()
+        testObject.set(["testKey", "testValue"])
+        if testObject.value(["testKey", "testValue"]):
+            pass
+        else:
+            assert False
+
+    def test_dydb_value_dict_value(self):
+        """Test that we can get a correct dict from a list of keys"""
+        testObject = DyDB.DyDB()
+        testObject.set(["testKey", "testValue"])
+        if testObject.value(["testKey", "testValue"])["testKey"] == False:
+            if testObject.value(["testKey", "testValue"])["testValue"] == False:
+                pass
+            else:
+                assert False
+        else:
+            assert False
+
     def test_dydb_key(self):
         """Test that we can get a list of keys from a value"""
         testObject = DyDB.DyDB()

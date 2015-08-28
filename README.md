@@ -36,6 +36,9 @@ someData = DyDB()
 # Set an empty Key:
 someData.set("myKey")
 
+# Set a Key with some Value:
+someData.set("otherKey", "myValue")
+
 # Grab a key's value:
 someData.value("myKey")
 

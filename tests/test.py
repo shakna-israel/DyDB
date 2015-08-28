@@ -212,7 +212,8 @@ class TestDyDB(unittest.TestCase):
         testObject = DyDB.DyDB()
         testObject.set("testKey", "testValue")
         testObject.store()
-        with open(os.path.expanduser("~/.DyDB/temp.dydb"), "r") as openFile:
+        tempID = testObject.value("_id")
+        with open(os.path.expanduser("~/.DyDB/" + tempID + ".dydb"), "r") as openFile:
             json_data = json.load(openFile)
         if "testKey" in json_data:
             pass

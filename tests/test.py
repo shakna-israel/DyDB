@@ -42,7 +42,6 @@ class TestDyDB(unittest.TestCase):
         if "testKey" in testData:
             pass
         else:
-            print(testData)
             assert False
 
     def test_dydb_set_single_value_is_false(self):
@@ -78,7 +77,7 @@ class TestDyDB(unittest.TestCase):
     def test_dydb_set_key_list(self):
         """Test that we can set a list of keys"""
         testObject = DyDB.DyDB()
-        testObject.set(["mykey","testkey"])
+        testObject.set(["myKey","testKey"])
         testData = json.loads(testObject.DataFileObject.getvalue())
         if "myKey" in testData:
             if "testKey" in testData:

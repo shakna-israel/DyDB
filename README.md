@@ -50,6 +50,9 @@ someData.set({"key":"value","somekey":"somevalue"})
 # Grab a key's value:
 someData.value("myKey")
 
+# Grab a dictionary of key values, from a list of keys:
+someData.value(["myKey, "otherKey"])
+
 # Grab a list of keys that have a certain value:
 someData.key(False)
 

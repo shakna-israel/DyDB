@@ -83,7 +83,7 @@ This will change in the future - it will remain a standalone file you can drop-i
 
 ## Contributing
 
-Currently, the project is at a very early stage. (Less than an hour at time of writing).
+Currently, the project is at a very early stage. (Think "pre-alpha").
 
 This means that there is not yet an apparent style guide for contributing new features, and bugs have not been identified.
 

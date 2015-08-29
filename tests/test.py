@@ -2,6 +2,7 @@ import unittest
 import DyDB
 import json
 import os
+import coverage
 
 class TestDyDB(unittest.TestCase):
 

@@ -85,7 +85,8 @@ someData.fetch("myfile.json")
     * All temporary files are stored in ```~/.DyDB``` or ```C:\Users\<your user>\.DyDB```
 * The database is ***not*** performant.
 * The top-level key *_id* is reserved. Overwriting it may cause the automatic temporary file storage to... Fail.
-* PyPy is not currently supported.
+* PyPy is not currently supported, however PyPy3 is.
+    * If anyone has an idea on how to fix this, feel free to make a pull request or create an issue.
 
 ## Install
 

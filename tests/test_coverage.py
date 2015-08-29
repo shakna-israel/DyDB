@@ -6,7 +6,8 @@ import unittest
 class TestCoverage(unittest.TestCase):
 
     def test_coverage(self):
-        """Test that code coverage is above 90%"""
+        """Test that code coverage is above 60%"""
+        # 60% only, as it averages coverage between tests and DyDB
 
         cov = coverage.coverage()
         tester = test.TestDyDB()
@@ -44,7 +45,7 @@ class TestCoverage(unittest.TestCase):
         cov.stop()
 
         final_coverage = int(cov.report())
-        if final_coverage < 90:
+        if final_coverage < 60:
             assert False
         else:
             pass
